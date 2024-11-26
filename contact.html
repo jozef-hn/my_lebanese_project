@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="cedar_logo.png">
+    <title>Contact Us</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Great+Vibes&family=Julius+Sans+One&family=VT323&family=Yellowtail&display=swap" rel="stylesheet">
+    <style>
+      /* General Reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Julius Sans One", sans-serif;
+        background: linear-gradient(to bottom, #1E8B15, #6BFFB3, #1e8b15);
+        color: white;
+        overflow-x: hidden;
+      }
+      .header_img{
+        position:absolute;
+        height:10%;
+        width:20%;
+        margin:1%;
+        margi-top:10%;
+        margin-right:20%;
+        padding:0%;
+        float:left;
+        z-index:100;
+      }
+      header, footer {
+        position:absolute;
+        margin-left:40%;
+        margin-right:0%;
+        width:55%;
+        height:20%;
+        z-index:100;
+        padding-top:3%; the issue is the space that's after the horizontal
+        font-size:100%;
+        float:right;
+        background-color: #d0000000;
+        color: white;
+        padding: 1em;
+        text-aign: center;
+      }
+      nav ol {
+        background-color:rgb(255,00,00,00);
+        margin:1%;
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+      }
+      nav ol li {
+        list-style-type: none;
+        display: inline;
+        color: white;
+        margin: 5%;
+        white-space: nowrap; 
+      }
+      nav ol li a{
+        text-decoration: none;
+        color: white;
+        padding:1%;
+        font-weight: bold;
+      }
+      a:hover{
+        color:#73f273;
+        background-color: white;
+        border: 1px solid white;
+        border-radius: 10px;
+        padding: 2%;
+        box_shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      }
+      #top_img {
+        text-align: center;
+        color: white;
+        margin:0%;
+        width: 100%;
+        height:100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color:black;
+      }
+      #top_section{
+        text-align:center;
+        position:absolute;
+        z-index:50;
+        margin-top:5%;
+        width:100%;
+        height:100%;
+        padding-bottom: 10%;
+      }
+      /* Header and Navigation */
+      .menu-icon {
+        display: none;
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        z-index: 200;
+        cursor: pointer;
+      }
+      .menu-icon div {
+        width: 25px;
+        height: 3px;
+        background-color: white;
+        margin: 5px 0;
+        border-radius: 2px;
+      }
+      .header_img {
+        position: absolute;
+        height: 10%;
+        width: 20%;
+        margin: 1%;
+        float: left;
+        z-index: 100;
+      }
+      
+      /* Contact Section */
+      .contact-header {
+        text-align: center;
+        padding: 40px;
+        color: white;
+        font-family: "Great Vibes", cursive;
+      }
+      .contact-header h1 {
+        font-weight:800;
+        font-size:15vw;
+        margin-top:10%;
+        color: #efdf8b;
+        text-decoration:none;
+      }
+      .contact-form {
+        background: rgba(0, 0, 0, 0.7);
+        padding: 30px;
+        border-radius: 10px;
+        margin: 30px auto;
+        max-width: 500px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+        margin:2% auto 5% auto;
+      }
+      .contact-form input,
+      .contact-form textarea {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background: #fff;
+        font-size: 1em;
+      }
+      h1{
+        font-family: "Great Vibes", cursive;
+        font-weight:400;
+        font-size:3em;
+        margin-top:10%;
+        text-align:center;
+        color: #d00000;
+        text-decoration:underline;
+        text-decoration-color:#d00000;
+      }
+      .contact-form button {
+        width: 100%;
+        padding: 10px;
+        background: #1E8B15;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 1.2em;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+      .contact-form button:hover {
+        background: #73f273;
+      }
+      footer{
+        padding-bottom:0%;
+        width:57%;
+      }
+      .footer_li{
+        color: #B00000;
+      }
+      .footer_a:hover{
+        background-color: white;
+        color: #D00000;
+        border-color:white;
+      }
+      #bttm_img{
+        position:relative;
+        top:3%;
+        bottom:0%;
+      }
+      /* Mobile Styles */
+      @media (max-width: 768px) {
+        header nav ol {
+          flex-direction: column;
+          align-items: center;
+        }
+        header nav ol li {
+          margin: 10px 0;
+        }
+        .menu-icon {
+          display: block;
+        }
+        footer {
+          position:relative;
+          margin:0;
+          width:90%;
+          height:auto;
+          text-align:center;
+          padding: 1em 0;
+        }
+        footer nav ol {
+          flex-direction:column;
+          align-items:center;
+          margin:10px auto;
+        }
+        footer nav ol li {
+          marign:10px 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Hamburger menu -->
+    <div class="menu-icon" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <!-- Header -->
+    <img class="header_img" src="lebanese_logo.png" alt="Lebanese logo">
+    <header>
+      <nav id="navbar">
+        <ol>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="culture.html">History & Culture</a></li>
+          <li><a href="attractions.html">Places to Visit</a></li>
+          <li><a href="food.html">Kitchen</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ol>
+      </nav>
+    </header>
+    <!-- Contact Section -->
+    
+    <section class="contact-header" id="top_section">
+      <h1>Contact Us</h1>
+    </section>
+    <img id="top_img" src="contact.jpg" alt="Old Phone">
+    <h1>Let's Gossip about our Website Around a Cup of Tea!</h1>
+    <section class="contact-form">
+      <form id="contact-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </section>
+    <h1>@credits: <a href="https://www.pexels.com/">Pexels.ccom</a> / <a href="https://pixabay.com/">Pixabay.com</a></h1>
+    <!-- Footer -->
+    <img class="header_img" id="bttm_img"  src="lebanese_logo.png" alt="Lebanese Logo">
+    <footer>
+      <nav>
+        <ol>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="culture.html">History and Culture</a></li>
+          <li><a href="attractions.html">Places to visit</a></li>
+          <li><a href="food.html">Kitchen</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ol>
+      </nav>
+    </footer>
+    <script>
+      function toggleMenu() {
+        const navbar = document.getElementById('navbar');
+        navbar.classList.toggle('open');
+      }
+    </script>
+  </body>
+</html>

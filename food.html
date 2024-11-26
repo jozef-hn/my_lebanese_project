@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="icon" href="cedar_logo.png">
+    <title>Lebanese Kitchen</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Great+Vibes&family=VT323&family=Yellowtail&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+      html{
+        width:100%;
+        height:100%;
+      }
+      body{
+        height:100vh;
+        width:100%;
+        margin:0;
+        font-family: Arial, sans-serif;
+        background-color: #ffaf50;
+        background-size: cover;
+      }
+      .header_img{
+        position:absolute;
+        height:10%;
+        width:20%;
+        margin:1%;
+        margi-top:10%;
+        margin-right:20%;
+        padding:0%;
+        float:left;
+        z-index:100;
+      }
+      header, footer {
+        position:absolute;
+        margin-left:40%;
+        margin-right:0%;
+        width:55%;
+        height:20%;
+        z-index:100;
+        padding-top:3%; the issue is the space that's after the horizontal
+        font-size:100%;
+        float:right;
+        background-color: #d0000000;
+        color: white;
+        padding: 1em;
+        text-aign: center;
+      }
+      nav ol {
+        background-color:rgb(255,00,00,00);
+        margin:1%;
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+      }
+      nav ol li {
+        list-style-type: none;
+        display: inline;
+        color: white;
+        margin: 5%;
+        white-space: nowrap; 
+      }
+      nav ol li a{
+        text-decoration: none;
+        color: white;
+        padding:1%;
+        font-weight: bold;
+      }
+      a:hover{
+        color:#73f273;
+        background-color: white;
+        border: 1px solid white;
+        border-radius: 10px;
+        padding: 2%;
+        box_shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      }
+      #top_img {
+        text-align: center;
+        color: white;
+        margin:0%;
+        width: 100%;
+        height:100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color:black;
+      }
+      #top_section{
+        text-align:center;
+        position:absolute;
+        z-index:50;
+        margin-top:5%;
+        width:100%;
+        height:100%;
+        padding-bottom: 10%;
+      }
+      h2{
+        margin:5%;
+        text-decoration: underline;
+        padding:0%;
+        font-size:2.5em;
+        color: #d00000;
+        text-align:center;
+      }
+      h1{
+          font-family: "Great Vibes", cursive;
+          font-weight: 800;
+          font-style: normal;
+          font-size: 10vw;
+          color:white;
+          margin-top:  15%;
+        }
+      #title{
+        font-size: 5vw;
+        font-weight:400;
+        text-align:center;
+        text-decoration:underline;
+        color: #d00000;
+        margin-top:7%;
+      }
+      #street_food{
+        font-size: 8vw;
+        font-weight:400;
+        text-align:center;
+        text-decoration:underline;
+        color: #d00000;
+        margin-top:7%;
+        margin-bottom:0%;
+        padding-bottom:0%;
+      }
+        p{
+          font-family: "Julius Sans One", sans-serif;
+          font-weight: 400;
+          font-style: normal;
+        }
+        .grid-container{
+          display:grid;
+          grid-template-columns: 1fr 1fr;
+          gap:20px;
+          max-width:1200px;
+          margin: 5%;
+        }
+        .grid-item{
+          display:flex;
+          align-items: center;
+          gap:20px;
+          padding:20px;
+          background: #fff0;
+          border-radius: 10px;
+          box-shadow: 0 4px 6px rgba(0, 0, 0,0.1);
+        }
+      .image-wrapper{
+        flex-shrink: :0;
+        width:100px;
+        height:100px;
+        overflow:hidden;
+        border-radius:50%;
+        trasition: transform 0.8s linear;
+        position:absolute;
+        z-index:10;
+      }
+      .image-wrapper img{
+        width:100%;
+        height:100%;
+        border-radius:50%;
+        object-fit: cover;
+        display:block;
+      }
+      .image-wrapper:hover{
+        transform: scale(1.2);
+      }
+      .content h2{
+        font-size:1.5rem;
+        color: #7a271c;
+        margin-bottom:10px;
+        text-align:center;
+        margin-left:110px;
+      }
+      .content p {
+        font-size: 1rem;
+        line-height:1.5;
+        color:#555;
+        text-align:center;
+        margin-left:110px;
+      }
+      /* Outer container */
+      /* Stage */
+      #stage {
+        overflow: hidden;
+        position: relative;
+        perspective: 500px;
+        width: 100%;
+        height: 400px;
+      }
+
+      /* Road */
+      #road {
+        position: relative;
+        opacity: 0.9;
+        width: 200%; /* Extend to allow smooth scrolling */
+        height: 20vw;
+        min-height: 200px;
+        background: #888;
+        background-image: linear-gradient(
+            rgba(0, 0, 0, 0.7) 0%,
+            rgba(0, 0, 0, 0.2) 35%,
+            rgba(80, 80, 80, 0.2) 50%,
+            rgba(30, 30, 30, 0.4) 70%,
+            rgba(60, 60, 60, 0.5) 87%,
+            rgba(180, 180, 180, 0.5) 100%
+          );
+        background-size: 19vw auto;
+        transform-origin: center top;
+        transform: rotateX(45deg);
+        animation: roadScroll 10s linear infinite; /* Smooth looping animation */
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin-bottom:0%;
+        paddin-bottom:0%;
+      }
+
+      /* Animation */
+      @keyframes roadScroll {
+        from {
+          transform: rotateX(45deg) translateX(0%);
+        }
+        to {
+          transform: rotateX(45deg) translateX(-50%); /* Move smoothly across */
+        }
+      }
+
+      /* Individual elements */
+      .element {
+        position: relative;
+        text-align: center;
+        background: white;
+        padding: 10px;
+        paddin-to:0%;
+        border-radius: 10px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+        margin: 0 auto; /* Space between elements */
+      }
+
+      .element img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        margin-bottom: 10px;
+      }
+
+      .element .info {
+        display: none; /* Initially hidden */
+      }
+
+      .element:hover {
+        transform: scale(1.3); /* Grow on hover */
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+        z-index: 10;
+      }
+
+      .element:hover .info {
+        display: block; /* Show info on hover */
+      }
+
+      .element .info h3 {
+        font-size: 16px;
+        color: #333;
+        margin: 5px 0;
+      }
+
+      .element .info p {
+        font-size: 14px;
+        color: #555;
+      }
+
+
+      /* Pause animation on hover */
+      #road:hover {
+        animation-play-state: paused;
+      }
+      .element {
+        position: relative;
+        text-align: center;
+        background: white;
+        padding: 10px;
+        border-radius: 10px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+        margin: 0 20px; /* Space between elements */
+      }
+
+      .element img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        margin-bottom: 10px;
+      }
+
+      .element .info {
+        display: none; /* Initially hidden */
+      }
+
+      .element:hover {
+        transform: scale(1.3); /* Grow on hover */
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+        z-index: 10;
+      }
+
+      .element:hover .info {
+        display: block; /* Show info on hover */
+      }
+
+      .element .info h3 {
+        font-size: 16px;
+        color: #333;
+        margin: 5px 0;
+      }
+      #pages_section {
+        display: flex;
+        align-items:stretch; /* Enables flex layout */
+        gap: 20px;                   /* Adds spacing between spans */
+        justify-content: space-between; /* Ensures equal spacing */
+          /* Aligns content at the top */
+        width: 90%;                 /* Full width */
+        margin:auto;            /* Optional: Add some vertical spacing */
+        box-sizing: border-box;      /* Include padding in width calculations */
+        padding: 20px;
+      }
+
+      /* Styling for individual span elements */
+      .page_item {
+        flex: 1; /* Makes all spans equal in width */
+        text-align: center;          /* Centers the text within each span */
+        padding: 10px;               /* Adds padding for spacing */
+        border: 1px solid #cccccc09;      /* Optional: Adds a border for visibility */
+        border-radius: 5px;          /* Optional: Rounds the corners */
+        background-color: #f9f9f909;   /* Optional: Adds a light background color */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4); /* Optional: Adds a shadow effect */
+      }
+
+      /* Styling for images */
+      .pages_images {
+        width: 100%;                 /* Makes images responsive */
+        max-height: 200px;           /* Limits image height */
+        object-fit: cover;           /* Ensures images don't stretch */
+        border-radius: 5px;          /* Optional: Rounds the image corners */
+        margin-bottom: 10px;         /* Adds spacing below the image */
+      }
+      html{
+        width:100%;
+        height:100%;
+      }
+      #lebanon_intro{
+        margin:10%;
+        height:50%;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+        padding: 4%;
+        background-color: #00000009
+      }
+      #lebanese_intro_pic{
+        margin-left:0%;
+        margin-right:2%;
+        width:50%;
+        height:100%;
+        display:inline;
+        float:left;
+        border-radius:10px;
+        animation_name: lebanese_intro_pic;
+        animation-duration: 5s;
+      }
+      body{
+        height:100%;
+        width:100%;
+        overflow-x:hidden;
+        margin:0;
+        font-family: Arial, sans-serif;
+        background-color: #fef7e3;
+      }
+      .header_img{
+        position:absolute;
+        height:10%;
+        width:20%;
+        margin:1%;
+        margi-top:10%;
+        margin-right:20%;
+        padding:0%;
+        float:left;
+        z-index:100;
+      }
+      header, footer {
+        position:absolute;
+        margin-left:40%;
+        margin-right:0%;
+        width:55%;
+        height:20%;
+        z-index:100;
+        padding-top:3%; the issue is the space that's after the horizontal
+        font-size: 100%;
+        float:right;
+        background-color: #d0000000;
+        color: white;
+        padding: 1em;
+        text-aign: center;
+      }
+      nav ol {
+        background-color:rgb(255,00,00,00);
+        margin:1%;
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+      }
+      nav ol li {
+        list-style-type: none;
+        display: inline;
+        color: white;
+        margin: 5%;
+        white-space: nowrap;
+      }
+      nav ol li a{
+        text-decoration: none;
+        color: white;
+        padding:1%;
+        font-weight: bold;
+      }
+      a:hover{
+        color:#73f273;
+        background-color: white;
+        border: 1px solid white;
+        border-radius: 10px;
+        padding: 2%;
+        box_shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      }
+      #lebanon_intro{
+        margin:10%;
+        height:50%;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+        padding: 4%;
+        background-color: #00000009
+      }
+      #lebanese_intro_pic{
+        margin-left:0%;
+        margin-right:2%;
+        width:50%;
+        height:100%;
+        display:inline;
+        float:left;
+        border-radius:10px;
+        animation_name: lebanese_intro_pic;
+        animation-duration: 5s;
+      }
+      h2{
+        margin:5%;
+        text-decoration: underline;
+        padding:0%;
+        font-size:2.5em;
+        color: #D00000;
+      }
+      h3 {
+        margin: 10px 0;
+        font-size: 1.2em;
+        color:#d00000;                 /* Darker text for better readability */
+      }
+      h1{
+        font-family: "Great Vibes", cursive;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 10vw;
+        color:#ff0e0e;
+        margin-top:  15%;
+        margin-bottom:5%;
+      }
+      p{
+        font-family: "Julius Sans One", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+      }
+      footer{
+        padding-bottom:0%;
+        width:57%;
+      }
+      .footer_li{
+        color: #B00000;
+      }
+      .footer_a:hover{
+        background-color: white;
+        color: #D00000;
+        border-color:white;
+      }
+      #bttm_img{
+        position:relative;
+        top:3%;
+        bottom:0%;
+      }
+      .menu-icon{
+        display:none;
+        position:absolute;
+        top:10px;
+        right:20px;
+        z-index:200;
+        cursor:pointer;
+      }
+      * {
+        box-sizing: inherit; /* Ensures padding and borders are included in width/height calculations */
+      }
+      .menu-icon div{
+        width:25px;
+        height:3px;
+        background-color:white;
+        margin:5px 0;
+        border-radius: 2px;
+      }
+      nav{
+        transition: max-height 0.3s ease-out;
+        overflow:hidden;
+      }
+      @media (max-width: 768px){
+        footer {
+          position:relative;
+          margin:0;
+          width:90%;
+          height:auto;
+          text-align:center;
+          padding: 1em 0;
+        }
+        .menu-icon {
+          display:block;
+        }
+        header nav{
+          max-height: 0;
+        }
+        header nav.open {
+          max-height:500px;
+        }
+        header nav ol{
+          flex-direction:column;
+          align-items:center;
+        }
+        #bttm_img{
+          display:none;
+        }
+        header nav ol li {
+          margin: 10px 0;
+        }
+        header{
+          height:auto;
+          text-align:center;
+        }
+        .header-img{
+          position:relative;
+          width:50%;
+          height:auto;
+          margin:10px auto;
+          display:block;
+        }
+        footer nav ol {
+          flex-direction:column;
+          align-items:center;
+          margin:10px auto;
+        }
+        footer nav ol li {
+          margin:10px 0;
+        }
+        h1{
+          font-size:8vw;
+          margi-top:20%;
+        }
+        h2{
+          font-size:5vw;
+        }
+        p{
+          font-size:1em;
+        }
+        #lebanese_intro{
+          margin: 5%;
+          padding:2%;
+        }
+        #lebanese_intro_pic{
+          width:100%;
+          margin: 0 0 20px 0;
+        }
+        bttm_img{
+          display:none;
+        }
+        #pages_section{
+          flex-direction:column;
+          align-items:center;
+          gap:15px;
+        }
+        .page_item{
+          max-height:none;
+        }
+        .grid-container{
+          display:flex;
+          flex-wrap:wrap;
+          flex-direction:column;
+          align-items:center;
+          gap:15px;
+        }
+        .grid-item{
+          max-height:none;
+        }
+      }
+      .container {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        text-align: center;
+      }
+      /* Background Layers */
+      .background {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom,#fef7e3, #ffd1a9, #fef7e3);
+        z-index: 1;
+      }
+      /* Text Section */
+      .text {
+        position: relative;
+        z-index: 3;
+        color: #6b4f34;
+        text-align: center;
+        padding: 20px;
+        margin-top: 30px;
+      }
+      .text h1 {
+        font-size: 2.5rem;
+        text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+      .text p {
+        font-size: 1rem;
+        margin-top: 10px;
+      }
+      /* Animated Desserts Section */
+      .desserts {
+        position: absolute;
+        bottom: 20%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        z-index: 2;
+      }
+      .dessert {
+        position: reative;
+        width: 250px;
+        height: 250px;
+        margin: 0 10px;
+        background: linear-gradient(to bottom, #d19f6b, #a86e3d);
+        border-radius: 10%;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        animation: bounce 3s infinite ease-in-out;
+      }
+      .dessert:nth-child(2) {
+        animation-delay: 0.3s;
+      }
+      .dessert:nth-child(3) {
+        animation-delay: 0.6s;
+      }
+      .dessert img{
+        width:50%;
+        height:50%;
+        margin: 20% auto;
+        object-fit:cover;
+        border-radius:50%;
+        margin-bottom:5px;
+        position:relative;
+        z-index:2;
+        transition: transform 0.5s linear;
+      }
+      .dessert img:hover{
+        transform: scale(1.2);
+      }
+      .dessert span {
+        font-size: 0.8rem;
+        color: #6b4f34;
+        font-weight:bold;
+        text-align: center;
+        position:relative;
+        z-index:2;
+      }
+      .dessert::before {
+        content: '';
+        position: absolute;
+        top: 10%;
+        left: 10%;
+        width: 80%;
+        height: 80%;
+        background: #f4e3d7; /* Highlight for sweet layers */
+        border-radius: 10%;
+        z-index: 1;
+      }
+      @keyframes bounce {
+        0%, 100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+      /* Mobile Responsiveness */
+      @media (max-width: 768px) {
+        .dessert {
+          width: 70px;
+          height: 70px;
+          margin: 0 5px;
+        }
+        .dessert img {
+          width:60%;
+          height:60%;
+        }
+        .text h1 {
+          font-size: 2rem;
+        }
+        .text p {
+          font-size: 0.9rem;
+        }
+      }
+        </style>
+      </head>
+      <body>
+        <div class="menu-icon" onclick="toggleMenu()">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <!-- Header -->
+        <img class="header_img" src="lebanese_logo.png" alt="Lebanese logo">
+        <header>
+          <nav id="navbar">
+            <ol>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="culture.html">History & Culture</a></li>
+              <li><a href="attractions.html">Places to Visit</a></li>
+              <li><a href="food.html">Kitchen</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ol>
+          </nav>
+        </header>
+        <main>
+          <section id="top_section">
+            <h1>Lebanese Kitchen</h1>
+            </section>
+            <img id="top_img" src="food.jpg" alt="Food">
+          <section id="lebanon_intro">
+            <img id="lebanese_intro_pic" src="food_intro.jpg" alt="Food">
+            <h2>Let's get "Lebanesed":</h2>
+            <p>Lebanese cuisine is a delicious blend of Mediterranean and Middle Eastern flavors, known for its fresh ingredients and aromatic spices. Dishes like hummus, tabbouleh, and kibbeh are staples, often served as part of a shared meze. The use of olive oil, lemon, and garlic highlights the cuisine's light yet flavorful profile, while desserts like baklava add a rich, sweet touch.</p>
+          </section>
+          <h1 id="title">Lebanese Traditional Dishes</h1>
+          <section class="grid-container">
+            <div class="grid-item">
+              <div class="image-wrapper">
+                <img src="kibbeh.jpg" alt="Dish 1">
+              </div>
+              <div class="content">
+                <h2>Kibbeh</h2>
+                <p>A versatile dish made from spiced ground meat and bulgur, served raw, fried, baked, and considered Lebanon's national dish.</p>
+              </div>
+            </div>
+            <div class="grid-item">
+              <div class="image-wrapper">
+                <img src="tabbouleh.jpg" alt="Dish 2">
+              </div>
+              <div class="content">
+                <h2>Tabbouleh</h2>
+                <p>A refreshing parsley-based salad mixed mixed with bugur, tomatoes, and a zesty lemon dressing.</p>
+              </div>
+            </div>
+          </section>
+          <section class="grid-container">
+            <div class="grid-item">
+              <div class="image-wrapper">
+                <img src="warak_enab.jpg" alt="Dish 3">
+              </div>
+              <div class="content">
+                <h2>Warak Enab</h2>
+                <p>Tender grape leaves stuffed with rice, spices, and sometimes meat, slow-cooked in olive oil and lemon juice.</p>
+              </div>
+            </div>
+            <div class="grid-item">
+              <div class="image-wrapper">
+                <img src="fattoush.jpg" alt="Dish 4">
+              </div>
+              <div class="content">
+                <h2>Fattoush</h2>
+                <p>A vibrant salad featuring crispy pita bread, fresh vegetables, and a tangy sumac-pomegranate dressing.</p>
+              </div>
+            </div>
+          </section>
+          <section class="grid-container">
+            <div class="grid-item">
+              <div class="image-wrapper">
+                <img src="moghrabieh.jpg" alt="Dish 5">
+              </div>
+              <div class="content">
+                <h2>Moghrabieh</h2>
+                <p>A comforting dish of pearl couscous, chickpeas, and meat cooked in an aromatic spiced broth.</p>
+              </div>
+            </div>
+            <div class="grid-item">
+              <div class="image-wrapper">
+                <img src="shish_barak.jpg" alt="Dish 6">
+              </div>
+              <div class="content">
+                <h2>Shish Barak</h2>
+                <p>Savory meat-filled dumplings simmered in a creamy, tangy yogurt sauce with garlic and coriander.</p>
+              </div>
+            </div>
+          </section>
+          <h1 id="street_food">Street Food</h1>
+          <section>
+            <div id="stage">
+              <div id="road">
+                <!-- Individual elements -->
+                <a href="#manakish">
+                  <div class="element">
+                  <img src="manakish.jpg" alt="Image 1">
+                  <div class="info">
+                    <h3>Manakish</h3>
+                  </div>
+                </div>
+                </a>
+                <a href="#falafel">
+                  <div class="element">
+                    <img src="falafel.jpg" alt="Image 2">
+                    <div class="info">
+                      <h3>Falafel</h3>
+                      </div>
+                  </div>
+                </a>
+                <a href="#shawarma">
+                  <div class="element">
+                    <img src="shawarma.jpg" alt="Image 3">
+                    <div class="info">
+                      <h3>Shawarma</h3>
+                      </div>
+                  </div>
+                </a>
+                <a href="#kaak">
+                  <div class="element">
+                    <img src="kaak.jpeg" alt="Image 4">
+                    <div class="info">
+                      <h3>Kaak</h3>
+                      </div>
+                  </div>
+                </a>
+                <a href="#sfiha">
+                  <div class="element">
+                    <img src="sfiha.jpeg" alt="Image 5">
+                    <div class="info">
+                      <h3>Sfiha</h3>
+                      </div>
+                  </div>
+                </a>
+                <a href="#saj">
+                  <div class="element">
+                    <img src="saj.jpeg" alt="Image 6">
+                    <div class="info">
+                      <h3>Saj Wraps</h3>
+                      </div>
+                  </div>
+                </a>
+                <a href="#batata">
+                  <div class="element">
+                    <img src="batata_harra.jpg" alt="Image 7">
+                    <div class="info">
+                      <h3>Batata Harra</h3>
+                      </div>
+                  </div>
+                </a>
+                <a href="#arayes">
+                  <div class="element">
+                    <img src="arayes.jpg" alt="Image 8">
+                    <div class="info">
+                      <h3>Arayes</h3>
+                      </div>
+                  </div>
+                </a>
+                <a href="#corn">
+                  <div class="element">
+                    <img src="corn.jpg" alt="Image 9">
+                    <div class="info">
+                      <h3>Corn on the Cob</h3>
+                      </div>
+                  </div>
+                </a>
+                <a href="#manakish">
+                  <div class="element">
+                  <img src="manakish.jpg" alt="Image 1">
+                  <div class="info">
+                    <h3>Manakish</h3>
+                  </div>
+                </div>
+                </a>
+                <a href="#falafel">
+                  <div class="element">
+                    <img src="falafel.jpg" alt="Image 2">
+                    <div class="info">
+                      <h3>Falafel</h3>
+                      </div>
+                  </div>
+                </a>
+                <a href="#shawarma">
+                  <div class="element">
+                    <img src="shawarma.jpg" alt="Image 3">
+                    <div class="info">
+                      <h3>Shawarma</h3>
+                      </div>
+                  </div>
+                </a>
+                <a href="#kaak">
+                  <div class="element">
+                    <img src="kaak.jpeg" alt="Image 4">
+                    <div class="info">
+                      <h3>Kaak</h3>
+                      </div>
+                  </div>
+                </a>
+                <a href="#sfiha">
+                  <div class="element">
+                    <img src="sfiha.jpeg" alt="Image 5">
+                    <div class="info">
+                      <h3>Sfiha</h3>
+                      </div>
+                  </div>
+                </a>
+                <a href="#saj">
+                  <div class="element">
+                    <img src="saj.jpeg" alt="Image 6">
+                    <div class="info">
+                      <h3>Saj Wraps</h3>
+                      </div>
+                  </div>
+                </a>
+                <a href="#batata">
+                  <div class="element">
+                    <img src="batata_harra.jpg" alt="Image 7">
+                    <div class="info">
+                      <h3>Batata Harra</h3>
+                      </div>
+                  </div>
+                </a>
+                <a href="#arayes">
+                  <div class="element">
+                    <img src="arayes.jpg" alt="Image 8">
+                    <div class="info">
+                      <h3>Arayes</h3>
+                      </div>
+                  </div>
+                </a>
+                <a href="#corn">
+                  <div class="element">
+                    <img src="corn.jpg" alt="Image 9">
+                    <div class="info">
+                      <h3>Corn on the Cob</h3>
+                      </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+          </section>
+          <section>
+            <section id="pages_section">
+              <span id="manakish" class="page_item">
+                <img class="pages_images" src="manakish.jpg" alt="Manakish">
+                <h3>Manakish</h3>
+                <p>The Lebanese version of pizza, this flatbread is topped with za'atar (a mix of thyme, sumac, and sesame seeds), cheese, or minced meat. It's baked to perfection and served fresh from the oven, making it a quick and delicious street snack.</p>
+              </span>
+              <span id="falafel" class="page_item">
+                <img class="pages_images" src="falafel.jpg" alt="Falafel">
+                <h3>Falafel</h3>
+                <p>Crispy deep-fried balls made of ground chickpeas, parsley, and spices. Often served in pita bread with fresh vegetables, pickles, and tahini sauce for a filling and flavorful treat.</p>
+              </span>
+              <span id="shawarma" class="page_item">
+                <img class="pages_images" src="shawarma.jpg" alt="Shawarma">
+                <h3>Shawarma</h3>
+                <p>Juicy and flavorful strips of marinated chicken or beef, cooked on a rotating spit and wrapped in pita bread with garlic sauce, pickles, and fries. A classic street food favorite.</p>
+              </span>
+            </section>
+            <section id="pages_section">
+              <span id="kaak" class="page_item">
+                <img class="pages_images" src="kaak.jpeg" alt="Kaak">
+                <h3>Kaak</h3>
+                <p>A sesame-covered bread ring, often filled with za'atar, cheese, or chocolate. Its distinct shape and portable size make it a common snack sold by street vendors.</p>
+              </span>
+              <span id="sfiha" class="page_item">
+                <img class="pages_images" src="sfiha.jpeg" alt="Sfiha">
+                <h3>Sfiha</h3>
+                <p>A Lebanese-style open-faced meat pie topped with spiced minced lamb or beef, pine nuts, and sometimes pomegranate molasses. It's a perfect handheld snack.</p>
+              </span>
+              <span id="saj" class="page_item">
+                <img class="pages_images" src="saj.jpeg" alt="Saj Wraps">
+                <h3>Saj Wraps</h3>
+                <p>Thin saj bread (similar to a crepe) filled with various options like cheese, za'atar, turkey, or labneh. Cooked on a domed griddle for a fresh and tasty bite.</p>
+              </span>
+            </section>
+            <section id="pages_section">
+              <span id="batata" class="page_item">
+                <img class="pages_images" src="batata_harra.jpg" alt="Batata Harra">
+                <h3>Batata Harra</h3>
+                <p>Spicy roasted potato cubes sautéed with garlic, cilantro, and chili. Often served as a snack or in wraps with other fillings.</p>
+              </span>
+              <span id="arayes" class="page_item">
+                <img class="pages_images" src="arayes.jpg" alt="Arayes">
+                <h3>Arayes</h3>
+                <p>Grilled pita sandwiches filled with minced meat, onions, and spices. Perfectly crispy and packed with flavor.</p>
+              </span>
+              <span id="corn" class="page_item">
+                <img class="pages_images" src="corn.jpg" alt="Corn">
+                <h3>Corn on the Cob</h3>
+                <p>Grilled corn on the cob, often served with a sprinkle of salt, spices, or a drizzle of lemon juice. A simple and comforting street food snack.</p>
+              </span>
+            </section>
+          </section>
+          <div class="container">
+            <div class="background"></div>
+            <!-- Title and Description -->
+            <div class="text">
+              <h1>Lebanese Desserts</h1>
+              <p>Indulge in the sweetness of baklava, knafeh, and more!</p>
+            </div>
+            <!-- Floating Dessert Containers -->
+            <div class="desserts">
+              <div class="dessert">
+                <img src="knafeh.jpeg" alt="Knafeh">
+                <span>Knafeh</span>
+              </div>
+              <div class="dessert">
+                <img src="baklava.jpg" alt="Baklava">
+                <span>Baklava</span>
+              </div>
+              <div class="dessert">
+                <img src="maamoul.jpg" alt="Maamoul">
+                <span>Maamoul</span>
+              </div>
+            </div>
+          </div>
+            </main>
+            <img class="header_img" id="bttm_img"  src="lebanese_logo.png" alt="Lebanese Logo">
+            <footer>
+              <nav>
+                <ol>
+                  <li><a href="index.html">Home</a></li>
+                  <li><a href="culture.html">History and Culture</a></li>
+                  <li><a href="attractions.html">Places to visit</a></li>
+                  <li><a href="food.html">Kitchen</a></li>
+                  <li><a href="contact.html">Contact</a></li>
+                </ol>
+              </nav>
+            </footer>
+        <script>
+          function toggleMenu() {
+            const navbar = document.getElementById('navbar');
+            navbar.classList.toggle('open');
+          }
+          const road = document.querySelector('#road');
+
+          road.addEventListener('mouseover', () => {
+            road.style.animationPlayState = 'paused';
+          });
+
+          road.addEventListener('mouseout', () => {
+            road.style.animationPlayState = 'running';
+          });
+
+        </script>
+      </body>
+</html>

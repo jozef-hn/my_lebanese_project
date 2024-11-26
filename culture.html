@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="icon" href="cedar_logo.png">
+    <title>Culture & History</title>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Great+Vibes&family=Julius+Sans+One&family=VT323&family=Yellowtail&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Great+Vibes&family=VT323&family=Yellowtail&display=swap" rel="stylesheet">
+    <style>
+      html{
+        width:100%;
+        height:100%;
+      }
+      body{
+        height:100vh;
+        width:100%;
+        margin:0;
+        font-family: Arial, sans-serif;
+        background-color: #bfbec7;
+        background-size: cover;
+      }
+      .header_img{
+        position:absolute;
+        height:10%;
+        width:20%;
+        margin:1%;
+        margi-top:10%;
+        margin-right:20%;
+        padding:0%;
+        float:left;
+        z-index:100;
+      }
+      header, footer {
+        position:absolute;
+        margin-left:40%;
+        margin-right:0%;
+        width:55%;
+        height:20%;
+        z-index:100;
+        padding-top:3%; the issue is the space that's after the horizontal
+        font-size:100%;
+        float:right;
+        background-color: #d0000000;
+        color: white;
+        padding: 1em;
+        text-aign: center;
+      }
+      nav ol {
+        background-color:rgb(255,00,00,00);
+        margin:1%;
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+      }
+      nav ol li {
+        list-style-type: none;
+        display: inline;
+        color: white;
+        margin: 5%;
+        white-space: nowrap; 
+      }
+      nav ol li a{
+        text-decoration: none;
+        color: white;
+        padding:1%;
+        font-weight: bold;
+      }
+      a:hover{
+        color:#73f273;
+        background-color: white;
+        border: 1px solid white;
+        border-radius: 10px;
+        padding: 2%;
+        box_shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      }
+      footer{
+        width:57%;
+      }
+      #top_img {
+        text-align: center;
+        color: white;
+        margin:0%;
+        width: 100%;
+        height:100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color:black;
+      }
+      #top_section{
+        text-align:center;
+        position:absolute;
+        z-index:50;
+        margin-top:5%;
+        width:100%;
+        height:100%;
+        padding-bottom: 10%;
+      }
+      h2{
+        margin:5%;
+        text-decoration: underline;
+        padding:0%;
+        font-size:2.5em;
+        color: #d00000;
+        text-align:center;
+      }
+      /* General Styles for the Slideshow */
+      /* General Styles for the Slideshow */
+      .slideshow-container {
+        position: relative;
+        width: 80%; /* Reduced size */
+        max-width: 700px; /* Smaller max-width */
+        height: 400px;
+        margin: auto;
+        margin-top: 10%;
+        overflow: hidden;
+        background-color: #f4f4f4; /* Light background for slides */
+        border-radius: 10px; /* Optional: Add rounded corners */
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+      }
+      /* Each Slide */
+      .slide {
+        display: none;
+        position: relative;
+        height: 100%;
+        width:100%;
+      }
+
+      .slide img {
+        width: 50%;
+        height: 100%;
+        display: block;
+        float:left;/* Optional: Add a border under images */
+        object-fit: cover;
+      }
+
+      .text {
+        padding: 20px;
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0); /* Dark overlay for text */
+        color: black;
+        font-size: 16px;
+      }
+      .text h3{
+        color:#d00000;
+        margin-top:5%;
+        text-decoration:underline;
+        text-decoration-color: #d00000;
+      }
+      /* Navigation Buttons */
+      .prev, .next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.3);
+        color: white;
+        font-size: 24px;
+        border: none;
+        border-radius: 50%;
+        padding: 10px 15px;
+        cursor: pointer;
+        z-index: 10;
+        text-decoration: none;
+      }
+
+      .prev:hover, .next:hover {
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+
+      .prev {
+        left: 10px;
+      }
+
+      .next {
+        right: 10px;
+      }
+
+      /* Dots Navigation */
+      .dots-container {
+        text-align: center;
+        margin-top: 10px;
+      }
+      #lebanon_intro{
+        margin:10%;
+        height:50%;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+        padding: 4%;
+        background-color: #00000009
+      }
+      #lebanese_intro_pic{
+        margin-left:0%;
+        margin-right:2%;
+        width:50%;
+        height:100%;
+        display:inline;
+        float:left;
+        border-radius:10px;
+        animation_name: lebanese_intro_pic;
+        animation-duration: 5s;
+      }
+      .dot {
+        cursor: pointer;
+        height: 15px;
+        width: 15px;
+        margin: 5px 5px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.3s ease;
+      }
+
+      .dot.active, .dot:hover {
+        background-color: #717171;
+      }
+
+      /* Fade Animation for Slides */
+      .fade {
+        animation-name: fade;
+        animation-duration: 1.5s;
+      }
+
+      @keyframes fade {
+        from {
+          opacity: 0.5;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+
+      /* Quiz Container */
+      .quiz-container {
+        background: #ffffff00;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        width: 90%;
+        max-width: 600px;
+        padding: 20px;
+        margin: 10% auto 5% auto;
+        text-align: center;
+      }
+
+      /* Progress Bar */
+      .progress-bar {
+        width: 100%;
+        background: #f2f2f2;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        overflow: hidden;
+      }
+
+      .progress {
+        width: 0%;
+        height: 10px;
+        background: #4caf50;
+        transition: width 0.3s ease-in-out;
+      }
+
+      /* Question Styling */
+      .question {
+        font-size: 1.5em;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+
+      /* Answer Options */
+      .options {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+
+      .option {
+        background: #f9f9f9a9;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        padding: 15px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .option:hover {
+        background: #d6f5d6;
+        border-color: #4caf50;
+      }
+
+      .option.selected {
+        background: #d6f5d6;
+        border-color: #4caf50;
+      }
+
+      /* Navigation Buttons */
+      .nav-buttons {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .nav-buttons button {
+        background: #4caf50;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 1em;
+        transition: background-color 0.3s ease;
+      }
+
+      .nav-buttons button:hover {
+        background: #45a049;
+      }
+
+      button:disabled {
+        background: #ddd;
+        cursor: not-allowed;
+      }
+      /* Highlight Correct Answer */
+      .option.correct {
+        background-color: #4caf50;
+        color: white;
+      }
+
+      /* Highlight Wrong Answer */
+      .option.wrong {
+        background-color: #f44336;
+        color: white;
+      }
+
+      /* Disable Clicking */
+      .option {
+        pointer-events: auto; /* Enabled by default */
+        transition: background-color 0.3s;
+      }
+      .menu-icon{
+        display:none;
+        position:absolute;
+        top:10px;
+        right:20px;
+        z-index:200;
+        cursor:pointer;
+      }
+      * {
+        box-sizing: inherit; /* Ensures padding and borders are included in width/height calculations */
+      }
+      .menu-icon div{
+        width:25px;
+        height:3px;
+        background-color:white;
+        margin:5px 0;
+        border-radius: 2px;
+      }
+      nav{
+        transition: max-height 0.3s ease-out;
+        overflow:hidden;
+      }
+      /* Responsive Design */
+      @media (max-width: 600px) {
+        .menu-icon {
+          display: block;
+          cursor: pointer;
+          z-index: 1000;
+          margin: 1em;
+          position: absolute;
+        }
+        #bttm_img{
+          display:none;
+        }
+        .menu-icon .bar {
+          background-color: white;
+          height: 4px;
+          margin: 5px 0;
+          width: 30px;
+        }
+        /* Hide the menu by default on small screens */
+        .menu {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .menu.open {
+          display: block;
+        }
+          footer {
+            position:relative;
+            margin:0;
+            width:100%;
+            height:auto;
+            text-align:center;
+            padding: 1em 0;
+          }
+          .menu-icon {
+            display:block;
+          }
+          header nav{
+            max-height: 0;
+          }
+          header nav.open {
+            max-height:500px;
+          }
+          header nav ol{
+            flex-direction:column;
+            align-items:center;
+          }
+          header nav ol li {
+            margin: 10px 0;
+          }
+          header{
+            height:auto;
+            text-align:center;
+          }
+          .header-img{
+            position:relative;
+            width:50%;
+            height:auto;
+            margin:10px auto;
+            display:block;
+          }
+          footer nav ol {
+            flex-direction:column;
+            align-items:center;
+          }
+          footer nav ol li {
+            margin:10px 0;
+          }
+        .quiz-container {
+          padding: 15px;
+        }
+
+        .question {
+          font-size: 1.2em;
+        }
+
+        .option {
+          padding: 10px;
+        }
+
+        .nav-buttons button {
+          padding: 8px 15px;
+        }
+      }
+      h1{
+        font-family: "Great Vibes", cursive;
+        font-weight: 800;
+        font-style: normal;
+        font-size: 10vw;
+        color:white;
+        margin-top:  15%;
+      }
+      p{
+        font-family: "Julius Sans One", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+      }
+    </style>
+  <body>
+    <div class="menu-icon" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <img class="header_img" src="lebanese_logo.png" alt="Lebanese logo">
+    <header>
+      <nav id="navbar">
+        <ol>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="culture.html">History & Culture</a></li>
+          <li><a href="attractions.html">Places to Visit</a></li>
+          <li><a href="food.html">Kitchen</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ol>
+      </nav>
+    </header>
+    <main>
+      <section id="top_section">
+        <h1>Culture & History</h1>
+        </section>
+      <img id="top_img" src="culture.jpg" alt="Sidon">
+      <section id="lebanon_intro">
+        <img id="lebanese_intro_pic" src="culture_intro.jpg" alt="Cedar">
+        <h2>Let's get "Lebanesed":</h2>
+        <p>Lebanon's culture reflects thousands of years of history, influenced by Phoenician, Roman, Ottoman, and French civilizations. Known for its religious diversity, discoveries (you know why the background is purple?) , myths and vibrant traditions, Lebanese society values family, music, and hospitality. This rich heritage is celebrated through festivals and communal gatherings that unite its people.</p>
+      </section>
+      <div class="quiz-container">
+        <!-- Progress Bar -->
+        <div class="progress-bar">
+          <div class="progress"></div>
+        </div>
+
+        <!-- Question Section -->
+        <div class="question" id="question">
+          What is the national tree of Lebanon?
+        </div>
+
+        <!-- Answer Options -->
+        <div class="options" id="options">
+          <div class="option">Olive Tree</div>
+          <div class="option">Cedar Tree</div>
+          <div class="option">Palm Tree</div>
+          <div class="option">Pine Tree</div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="nav-buttons">
+          <button id="prev" disabled>Previous</button>
+          <button id="next">Next</button>
+        </div>
+      </div>
+      <section>
+        <div class="slideshow-container">
+          <div class="slide fade">
+          <img src="cave.jpg" alt="Cave Painting">
+          <div class="text">
+          <h3>Prehistoric Lebanon (100,000 BCE - 3,300 BCE)</h3>
+          <p>Lebanon's history begins in prehistoric times with evidence of human settlements found in its caves and valleys. Archaeological discoveries reveal tools, pottery, and other artifacts that reflect the lives of early inhabitants during the Neolithic period. These communities were among the first to practice agriculture and domesticate animals in the region.</p>
+          </div>
+          </div>
+          <div class="slide fade">
+          <img src="phoenic.jpg" alt="The Phoenician Bird">
+          <div class="text">
+          <h3>Phoenician Period (3,000 BCE - 539 BCE)</h3>
+          <p>The Phoenicians were masterful seafarers, traders, and innovators who established thriving city-states like Byblos, Sidon, and Tyre along the Mediterranean. They developed the first alphabet, revolutionizing communication and trade across the ancient world. Their influence extended to distant shores, creating a legacy that shaped civilizations for centuries.</p>
+          </div>
+          </div>
+          <div class="slide fade">
+          <img src="persian.jpg" alt="Persian Architecture">
+          <div class="text">
+          <h3>Persian Period (539 BCE - 332 BCE)</h3>
+          <p>Under the Achaemenid Empire, Lebanon became a vital part of a vast trade network connecting the East and West. Persian rule introduced administrative efficiency and promoted cultural exchange, leaving a lasting mark on local traditions and architecture.</p>
+          </div>
+          </div>
+          <div class="slide fade">
+          <img src="hellenestic.jpg" alt="Hellenistic Architecture">
+          <div class="text">
+          <h3>Hellenistic Period (333 BCE - 64 BCE)</h3>
+          <p>Alexander the Great's conquest brought Hellenistic culture to Lebanon, blending Greek customs with local traditions. This period saw the rise of new cities, theaters, and temples, reflecting a dynamic cultural fusion that enriched the region’s history.</p>
+          </div>
+          </div>
+          <div class="slide fade">
+          <img src="roman.jpg" alt="Jupiter Temple">
+          <div class="text">
+          <h3>Roman Period (64 BCE - 395 CE)</h3>
+          <p>Under Roman rule, Lebanon flourished as a province renowned for its monumental architecture. The temples of Baalbek, with their grandeur and precision, are lasting symbols of this era. Roman roads, aqueducts, and theaters contributed to urban development and prosperity.</p>
+          </div>
+          </div>
+          <div class="slide fade">
+          <img src="christianity.jpg" alt="Christian Art">
+          <div class="text">
+          <h3>Byzantine Period (395 CE - 636 CE)</h3>
+          <p>The spread of Christianity transformed Lebanon into a center of religious activity. Byzantine rulers supported the construction of monasteries, churches, and mosaics, many of which still stand as testaments to this transformative period.</p>
+          </div>
+          </div>
+          <div class="slide fade">
+          <img src="islam.jpg" alt="Islamic Mosque">
+          <div class="text">
+          <h3>Early Islamic Period (636 CE - 1099 CE)</h3>
+          <p>With the arrival of Arab Muslim armies, Lebanon experienced profound changes. Islamic culture, governance, and architecture left an indelible mark, as mosques and fortresses began to shape the landscape, symbolizing a new era of cultural and religious diversity.</p>
+          </div>
+          </div>
+          <div class="slide fade">
+          <img src="crusador.jpg" alt="Knight">
+          <div class="text">
+          <h3>Crusader Period (1099 CE - 1291 CE)</h3>
+          <p>The Crusaders built impressive castles and fortifications, such as Byblos Castle, as they sought control over the Holy Land. Their influence reshaped Lebanon’s cities, creating a legacy of resilience amid conflict and shifting powers.</p>
+          </div>
+          </div>
+          <div class="slide fade">
+          <img src="mamluk.jpg" alt="Architecture">
+          <div class="text">
+          <h3>Mamluk Period (1291 CE - 1516 CE)</h3>
+          <p>Following their victory over the Crusaders, the Mamluks fortified Lebanon’s cities and enhanced trade networks. Tripoli became a center of learning and culture, boasting schools, mosques, and bustling markets that showcased the era's architectural elegance.</p>
+          </div>
+          </div>
+          <div class="slide fade">
+          <img src="ottamans.jpg" alt="Ottoman Mosque">
+          <div class="text">
+          <h3>Ottoman Empire (1516 CE - 1918 CE)</h3>
+          <p>Lebanon thrived under Ottoman rule, enjoying semi-autonomy through local leaders like the Druze emirs. The empire fostered trade and agriculture, laying the groundwork for Lebanon’s modern identity while blending diverse cultural influences.</p>
+          </div>
+          </div>
+          <div class="slide fade">
+          <img src="eiffel.jpg" alt="Eiffel Tower">
+          <div class="text">
+          <h3>French Mandate (1920 CE - 1943 CE)</h3>
+          <p>After World War I, Lebanon came under French mandate, leading to the establishment of modern borders and political structures. French influence modernized infrastructure and education, shaping the country’s development during a pivotal period.</p>
+          </div>
+          </div>
+          <div class="slide fade">
+          <img src="independance.png" alt="Lebanon">
+          <div class="text">
+          <h3>Independence and Modern Era (1943 CE - Present)</h3>
+          <p>Lebanon’s independence in 1943 marked the beginning of its journey as a sovereign nation. Despite facing challenges such as the civil war (1975–1990), Lebanon emerged as a hub of culture, trade, and resilience, continuing to inspire hope for the future.</p>
+          </div>
+          </div>
+          <div class="slide fade">
+          <img src="victory.png" alt="Victory">
+          <div class="text">
+          <h3>Now</h3>
+          <p>Lebanon endures hardships, including conflict and adversity, but its people remain unwavering in their spirit. Despite the current challenges, the resilience of the Lebanese people promises a brighter future, where the nation will rise stronger than ever.</p>
+          </div>
+          </div>
+          <!-- Navigation Buttons -->
+          <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+          <a class="next" onclick="changeSlide(1)">&#10095;</a>
+        </div>
+
+        <!-- Dots -->
+        <div class="dots-container">
+          <span class="dot" onclick="currentSlide(1)"></span>
+          <span class="dot" onclick="currentSlide(2)"></span>
+          <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+            <span class="dot" onclick="currentSlide(5)"></span>
+            <span class="dot" onclick="currentSlide(6)"></span>
+            <span class="dot" onclick="currentSlide(7)"></span>
+            <span class="dot" onclick="currentSlide(8)"></span>
+            <span class="dot" onclick="currentSlide(9)"></span>
+            <span class="dot" onclick="currentSlide(10)"></span>
+            <span class="dot" onclick="currentSlide(11)"></span>
+            <span class="dot" onclick="currentSlide(12)"></span>
+            <span class="dot" onclick="currentSlide(13)"></span>
+          <!-- Add more dots for additional slides -->
+        </div>
+      </section>
+    </main>
+    <img class="header_img" id="bttm_img"  src="lebanese_logo.png" alt="Lebanese Logo">
+    <footer>
+      <nav>
+        <ol>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="culture.html">History and Culture</a></li>
+          <li><a href="attractions.html">Places to visit</a></li>
+          <li><a href="food.html">Kitchen</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ol>
+      </nav>
+    </footer>
+    <script>
+      // JavaScript to hide the preloader after the page is fully loaded
+      window.addEventListener('load', function () {
+        document.body.classList.add('loaded');
+      });
+      function toggleMenu() {
+        const navbar = document.getElementById('navbar');
+        navbar.classList.toggle('open');
+      }
+      let currentSlideIndex = 0;
+
+      function showSlides(index) {
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+
+        // Loop around when reaching end or start
+        if (index >= slides.length) currentSlideIndex = 0;
+        if (index < 0) currentSlideIndex = slides.length - 1;
+
+        // Hide all slides and remove active class from dots
+        slides.forEach((slide, i) => {
+          slide.style.display = i === currentSlideIndex ? 'block' : 'none';
+        });
+
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === currentSlideIndex);
+        });
+      }
+
+      function changeSlide(step) {
+        currentSlideIndex += step;
+        showSlides(currentSlideIndex);
+      }
+
+      function currentSlide(index) {
+        currentSlideIndex = index - 1;
+        showSlides(currentSlideIndex);
+      }
+
+      // Initialize the first slide
+      showSlides(currentSlideIndex);
+
+      const quizData = [{
+          question: "Which UNESCO world heritage site in Lebanon is home to ancient Roman temples?",
+          options: ["Baalbak", "Tyre", "Tripoli", "Jounieh"],
+          correct: 0, // Index of the correct answer
+        },
+        {
+          question: "What's the proper way to drink Lebanese coffee?",
+          options: ["Lebanese people don't drink coffee!", "Small sips, slowly, while discussing politics, family and the meaning of life.", "Drink it fast to insight into it, tobsir.", "Lebanese can't drink coffee in peace without someone to threw it on the floor!"],
+          correct: 1,
+        },
+        {
+          question: "What's the significance of the EVIL EYE in Lebanese Culture?",
+          options: ["Chance", "Misfortune", "Cute Decoration", "They don't believe in evil eye!"],
+          correct: 1,
+        },
+        {
+          question: "What happen's if you refuse to eat at someone's house?",
+          options: ["They don't insist", "They'll think ur offended and might call your mom", "They'll insist until you gain 30kg while you're in their house", "They don't even want you to eat!"],
+          correct: 1,
+        },
+        {
+          question: "What is the significance of the Cedars of Lebanon in Phoenician mythology?",
+          options: ["Sacred trees", "Normal trees", "Peace", "MONSTERS!"],
+          correct: 0,
+        },
+        {
+          question: "What is the Lebanese superstition about whistling at night?",
+          options: ["They'll die", "Attract insects", "Attract evil spirits", "They won't hear, they're busy partying!"],
+          correct: 2,
+        },
+        {
+          question: "What does the Lebanese gesture of pulling you earlobe mean?",
+          options: ["Deliciouss", "Unsecure", "Just an itch", "Propbably bewitching someone!"],
+          correct: 0,
+        },
+        {
+          question: "In Lebanese folklore, what happens if you hear a wolf howl at night?",
+          options: ["Ward of evil spirits", "The wolf is hungry", "They should go to sleep", "FULL MOON!"],
+          correct: 0,
+        },
+        {
+          question: "What is the traditional dance of Lebanon called?",
+          options: ["Dabke", "Salsa", "Zajal", "They don't know how to dance!"],
+          correct: 0,
+        },
+        {
+          question: "Then What it does symbolize?",
+          options: ["Romance", "Spirits Chasing", "Communtiy and Unity", "Celebrations and joy"],
+          correct: 2,
+        },
+        {
+          question: "What do they say when you compliment a Lebanese Baby?",
+          options: ["aa'belak", "Khamsa w khmeesa", "They don't say anything", "He's like youu"],
+          correct: 1,
+        },
+        {
+          question: "What's the typical response when a Lebanese person says 'Tfaddal'(welcome/please take)?",
+          options: ["Accept immediatly", "Refuse and move on", "Take it and say Thank you!", "Refuse three times, then finally accept it because it's polite"],
+          correct: 3,
+        },
+        {
+          question: "Wich mythical sea creature is said to haunt the Mediterranean coast near Tyre?",
+          options: ["Kraken", "Mermaid", "Leviathan", "Hippocampus"],
+          correct: 1,
+        },
+        {
+          question: "Who is the Lebanese Mythical character that is said to protect homes and people from harm?",
+          options: ["Abou El Houl", "Shadid el-Akl", "Ghul", "Afrit"],
+          correct: 0,
+        },
+      ];
+      // DOM Elements
+      const questionEl = document.getElementById("question");
+      const optionsEl = document.getElementById("options");
+      const prevButton = document.getElementById("prev");
+      const nextButton = document.getElementById("next");
+      const progressEl = document.querySelector(".progress");
+
+      // Variables to Track Quiz State
+      let currentQuestion = 0;
+      let userAnswers = new Array(quizData.length).fill(-1); // Initialize with -1 (unanswered)
+
+      // Load a Question
+      function loadQuestion() {
+        const currentData = quizData[currentQuestion];
+        questionEl.textContent = currentData.question;
+
+        // Clear existing options
+        optionsEl.innerHTML = "";
+        currentData.options.forEach((option, index) => {
+          const optionEl = document.createElement("div");
+          optionEl.classList.add("option");
+          optionEl.textContent = option;
+
+          // Highlight already selected answers
+          if (userAnswers[currentQuestion] === index) {
+            optionEl.classList.add("selected");
+            if (index === currentData.correct) {
+              optionEl.classList.add("correct");
+            } else {
+              optionEl.classList.add("wrong");
+            }
+          }
+
+          // Handle click
+          optionEl.onclick = () => selectAnswer(index);
+
+          optionsEl.appendChild(optionEl);
+        });
+
+        // Update navigation buttons and progress bar
+        prevButton.disabled = currentQuestion === 0;
+        nextButton.textContent =
+          currentQuestion === quizData.length - 1 ? "Submit" : "Next";
+        progressEl.style.width = `${((currentQuestion + 1) / quizData.length) * 100}%`;
+      }
+
+      // Handle Option Selection
+      function selectAnswer(index) {
+        userAnswers[currentQuestion] = index;
+
+        // Highlight answers
+        const allOptions = document.querySelectorAll(".option");
+        allOptions.forEach((option, i) => {
+          option.classList.remove("selected", "correct", "wrong");
+
+          if (i === quizData[currentQuestion].correct) {
+            option.classList.add("correct"); // Highlight the correct option
+          } else if (i === index) {
+            option.classList.add("wrong"); // Highlight the wrong selection
+          }
+
+          // Disable clicking
+          option.style.pointerEvents = "none";
+        });
+      }
+
+      // Handle Next Button Click
+      nextButton.addEventListener("click", () => {
+        if (userAnswers[currentQuestion] === -1) {
+          alert("Please select an answer!");
+          return;
+        }
+        if (currentQuestion === quizData.length - 1) {
+          showResults();
+        } else {
+          currentQuestion++;
+          loadQuestion();
+        }
+      });
+
+      // Handle Previous Button Click
+      prevButton.addEventListener("click", () => {
+        if (currentQuestion > 0) {
+          currentQuestion--;
+          loadQuestion();
+        }
+      });
+
+      // Show Results
+      function showResults() {
+        let score = 0;
+
+        // Calculate score
+        userAnswers.forEach((answer, index) => {
+          if (answer === quizData[index].correct) {
+            score++;
+          }
+        });
+
+        console.log("User Answers:", userAnswers); // Debugging
+        console.log("Quiz Data Length:", quizData.length); // Debugging
+
+        // Display results
+        const resultMessage = `
+          <h2>Your Score: ${score} / ${quizData.length}</h2>
+          <p>Thanks for participating in the quiz about Lebanese culture!</p>
+        `;
+        document.querySelector(".quiz-container").innerHTML = resultMessage;
+      }
+
+
+      // Load the first question
+      loadQuestion();
+
+    </script>
+  </body>
+</html>

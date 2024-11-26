@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="cedar_logo.png">
+    <title>Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Great+Vibes&family=Julius+Sans+One&family=VT323&family=Yellowtail&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Great+Vibes&family=VT323&family=Yellowtail&display=swap" rel="stylesheet">
+    <style>
+      /* Internal CSS */
+      html{
+        width:100%;
+        height:100%;
+      }
+      :root {
+        --hue: 223;
+        --bg: #000;
+        --fg: #fff;
+        --trans-dur: 0.3s;
+        font-size: calc(16px + (24 - 16) * (100vw - 320px) / (1280 - 320));
+      }
+      /* Preloader */
+      #preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: var(--bg);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
+      /* SVG loader */
+      .ip {
+        width: 16em;
+        height: 8em;
+      }
+      .ip__track {
+        stroke: hsl(var(--hue), 90%, 90%);
+        transition: stroke var(--trans-dur);
+      }
+      .ip__worm1,
+      .ip__worm2 {
+        animation: worm1 2s linear infinite;
+      }
+      .ip__worm2 {
+        animation-name: worm2;
+      }
+      /* Dark theme */
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: hsl(var(--hue), 90%, 5%);
+          --fg: hsl(var(--hue), 90%, 95%);
+        }
+        .ip__track {
+          stroke: hsl(var(--hue), 90%, 15%);
+        }
+      }
+      /* Animation */
+      @keyframes worm1 {
+        from {
+          stroke-dashoffset: 0;
+        }
+        50% {
+          animation-timing-function: steps(1);
+          stroke-dashoffset: -358;
+        }
+        50.01% {
+          animation-timing-function: linear;
+          stroke-dashoffset: 358;
+        }
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+      @keyframes worm2 {
+        from {
+          stroke-dashoffset: 358;
+        }
+        50% {
+          stroke-dashoffset: 0;
+        }
+        to {
+          stroke-dashoffset: -358;
+        }
+      }
+      /* Hide preloader after page loads */
+      body.loaded #preloader {
+        display: none;
+      }
+      body{
+        height:100%;
+        width:100%;
+        overflow-x:hidden;
+        margin:0;
+        font-family: Arial, sans-serif;
+        background-color: #fcfbfc;
+      }
+      .header_img{
+        position:absolute;
+        height:10%;
+        width:20%;
+        margin:1%;
+        margin-top:3%;
+        margin-right:20%;
+        padding:0%;
+        float:left;
+        z-index:100;
+      }
+      header, footer {
+        position:absolute;
+        margin-left:40%;
+        margin-right:0%;
+        width:55%;
+        height:20%;
+        z-index:100;
+        padding-top:3%; the issue is the space that's after the horizontal
+        font-size: 100%;
+        float:right;
+        background-color: #d0000000;
+        color: white;
+        padding: 1em;
+        text-aign: center;
+      }
+      nav ol {
+        background-color:rgb(255,00,00,00);
+        margin:1%;
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+      }
+      nav ol li {
+        list-style-type: none;
+        display: inline;
+        color: white;
+        margin-top:5%;
+        margin: 3%;
+        white-space: nowrap;
+        font-size: 0.7em;
+      }
+      nav ol li a{
+        text-decoration: none;
+        color: white;
+        padding:1%;
+        font-weight: bold;
+      }
+      a:hover{
+        color: #73f273;
+        background-color: white;
+        border: 1px solid white;
+        border-radius: 10px;
+        padding: 2%;
+        box_shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      }
+      #vanta-container {
+        text-align: center;
+        color: white;
+        margin:0%;
+        width: 100%;
+        height:100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color:black;
+        padding:0%;
+      }
+      #lebanon_intro{
+        margin:10%;
+        height:50%;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+        padding: 4%;
+        background-color: #fcfbfc;
+      }
+      #lebanese_intro_pic{
+        margin-left:0%;
+        margin-right:2%;
+        width:50%;
+        height:100%;
+        display:inline;
+        float:left;
+        border-radius:10px;
+        animation_name: lebanese_intro_pic;
+        animation-duration: 5s;
+      }
+      h2{
+        margin:5%;
+        text-decoration: underline;
+        padding:0%;
+        font-size:2em;
+        color: #D00000;
+      }
+      #pages_section {
+        display: flex;
+        align-items:stretch; /* Enables flex layout */
+        gap: 20px;                   /* Adds spacing between spans */
+        justify-content: space-between; /* Ensures equal spacing */
+          /* Aligns content at the top */
+        width: 90%;                 /* Full width */
+        margin:auto;            /* Optional: Add some vertical spacing */
+        box-sizing: border-box;      /* Include padding in width calculations */
+        padding: 20px;
+      }
+      /* Styling for individual span elements */
+      .page_item {
+        flex: 1; /* Makes all spans equal in width */
+        text-align: center;          /* Centers the text within each span */
+        padding: 10px;               /* Adds padding for spacing */
+        border: 1px solid #cccccc09;      /* Optional: Adds a border for visibility */
+        border-radius: 5px;          /* Optional: Rounds the corners */
+        background-color: #fcfbfc;   /* Optional: Adds a light background color */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4); /* Optional: Adds a shadow effect */
+        transition: transform 0.3s linear;
+      }
+      .page_item:hover {
+        transform: scale(1.05); /* Scale up on hover */
+      }
+      /* Styling for images */
+      .pages_images {
+        width: 100%;                 /* Makes images responsive */
+        max-height: 200px;           /* Limits image height */
+        object-fit: cover;           /* Ensures images don't stretch */
+        border-radius: 5px;          /* Optional: Rounds the image corners */
+        margin-bottom: 10px;         /* Adds spacing below the image */
+      }
+      /* Optional styling for text */
+      h3 {
+        margin: 10px 0;
+        font-size: 1.2em;
+        color:#d00000;                 /* Darker text for better readability */
+      }
+      h1{
+        font-family: "Great Vibes", cursive;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 10vw;
+        color:#ff0e0e;
+        margin-top:  15%;
+        margin-bottom:5%;
+      }
+      p{
+        font-family: "Julius Sans One", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+      }
+      input{
+        background-color:rgb(255,00,00,00);
+        border:solid;
+        border-radius: 40px;
+        border-color:white;
+        color:white;
+        padding:1%;
+        text-align:center;
+        text-decoration:none;
+        display:inline-block;
+        font-size:100%;
+        margin:auto;
+        cursor:pointer;
+      }
+      input:hover{
+        background-color:#73f273;
+        opacity:0.7;
+        border:solid;
+        border-radius: 40px;
+        border-color:white;
+        color:white;
+        padding:1%;
+        text-align:center;
+        text-decoration:underline;
+        display:inline-block;
+        font-size:100%;
+        margin:auto;
+      }
+      footer{
+        padding-bottom:0%;
+        width:57%;
+      }
+      .footer_li{
+        color: #B00000;
+      }
+      .footer_a{
+        color: #d00000;
+      }
+      .footer_a:hover{
+        background-color:#73f273;
+        color: white;
+        border-color:white;
+      }
+      #bttm_img{
+        position:relative;
+        bottom:5%;
+      }
+      .menu-icon{
+        display:none;
+        position:absolute;
+        top:10px;
+        right:20px;
+        z-index:200;
+        cursor:pointer;
+      }
+      * {
+        box-sizing: inherit; /* Ensures padding and borders are included in width/height calculations */
+      }
+      .menu-icon div{
+        width:25px;
+        height:3px;
+        background-color:white;
+        margin:5px 0;
+        border-radius: 2px;
+      }
+      nav{
+        transition: max-height 0.3s ease-out;
+        overflow:hidden;
+      }
+      @media (max-width: 768px){
+        footer {
+          position:relative;
+          margin:0;
+          width:90%;
+          height:auto;
+          text-align:center;
+          padding: 1em 0;
+        }
+        .menu-icon {
+          display:block;
+        }
+        header nav{
+          max-height: 0;
+        }
+        header nav.open {
+          max-height:500px;
+        }
+        header nav ol{
+          flex-direction:column;
+          align-items:center;
+        }
+        header nav ol li {
+          margin: 10px 0;
+        }
+        header{
+          height:auto;
+          text-align:center;
+        }
+        .header-img{
+          position:relative;
+          width:50%;
+          height:auto;
+          margin:10px auto;
+          display:block;
+        }
+        h1{
+          font-size:8vw;
+          margi-top:20%;
+        }
+        h2{
+          font-size:5vw;
+        }
+        p{
+          font-size:1em;
+        }
+        #lebanese_intro{
+          margin: 5%;
+          padding:2%;
+        }
+        #lebanese_intro_pic{
+          width:100%;
+          margin: 0 0 20px 0;
+        }
+        #pages_section{
+          flex-direction:column;
+          align-items:center;
+          gap:15px;
+        }
+        .page_item{
+          max-height:none;
+        }
+        footer nav ol {
+          flex-direction:column;
+          align-items:center;
+        }
+        footer nav ol li {
+          margin:10px 0;
+        }
+        input{
+          font-size: 1em;
+        }
+        #bttm_img{
+          display:none;
+        }
+      }
+      /* General Reset */
+      .header-img{
+        position:relative;
+        width:50%;
+        height:20%;
+        margin:20px auto;
+        display:block;
+      }
+    </style>
+  </head>
+      <body>
+        <!-- Preloader Section -->
+        <div id="preloader">
+          <svg class="ip" viewBox="0 0 256 128" width="256px" height="128px" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#5EBD3E" />
+                <stop offset="33%" stop-color="#FFB900" />
+                <stop offset="67%" stop-color="#F78200" />
+                <stop offset="100%" stop-color="#E23838" />
+              </linearGradient>
+              <linearGradient id="grad2" x1="1" y1="0" x2="0" y2="0">
+                <stop offset="0%" stop-color="#E23838" />
+                <stop offset="33%" stop-color="#973999" />
+                <stop offset="67%" stop-color="#009CDF" />
+                <stop offset="100%" stop-color="#5EBD3E" />
+              </linearGradient>
+            </defs>
+            <g fill="none" stroke-linecap="round" stroke-width="16">
+              <g class="ip__track" stroke="#ddd">
+                <path d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56"/>
+                <path d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64"/>
+              </g>
+              <g stroke-dasharray="180 656">
+                <path class="ip__worm1" stroke="url(#grad1)" stroke-dashoffset="0" d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56"/>
+                <path class="ip__worm2" stroke="url(#grad2)" stroke-dashoffset="358" d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+    <!-- Hamburger menu -->
+    <div class="menu-icon" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <!-- Header -->
+    <img class="header_img" src="lebanese_logo.png" alt="Lebanese logo">
+    <header>
+      <nav id="navbar">
+        <ol>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="culture.html">History & Culture</a></li>
+          <li><a href="attractions.html">Places to Visit</a></li>
+          <li><a href="food.html">Kitchen</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ol>
+      </nav>
+    </header>
+    <!-- Main content -->
+    <main>
+      <div id="vanta-container">
+        <h1>Welcome to Lebanon</h1>
+        <p>Explore the rich and diverse past of one of the world's oldest civilizations.</p>
+        <input type="button" value="Get Lebanesed" onclick="location.href='index.html'">
+      </div>
+      <section id="lebanon_intro">
+        <img id="lebanese_intro_pic" src="cedar.jpg" alt="Cedar">
+        <h2>Let's get "Lebanesed":</h2>
+        <p>Lebanon is like nature’s overachieving student—packed into a space just over 10,000 square kilometers, it boasts snow-capped mountains, sunny Mediterranean beaches, and forests so dense they once gave rise to the legendary Cedars of Lebanon. Scientists might call it a biodiversity hotspot, but locals just call it home. It’s a place where tectonic plates meet (hello, earthquakes!), where ancient Phoenician ruins coexist with modern skyscrapers, and where even the food seems to defy physics—how can something as small as a tabbouleh bowl pack so much flavor? If you’re looking for a country that’s both a geological marvel and a culinary playground, Lebanon delivers with a wink and a plate of hummus.</p>
+      </section>
+      <section id="pages_section">
+        <span class="page_item">
+          <img class="pages_images" src="books.jpg" alt="Books">
+          <h3>Bored? Take a Look at our Culture and History!</h3>
+          <p>Lebanese culture blends ancient traditions with modern charm. Hospitality is key—guests are always welcomed with coffee and sweets. Dance, music, and festivals bring people together, celebrating life with joy and flair.</p>
+          <p><a href="culture.html">Discover More...</a></p>
+        </span>
+        <span class="page_item">
+          <img class="pages_images" src="jeitaGrotti.jfif" alt="Jeita Grotto">
+          <h3>Wanna Go Out? Let's Go to Lebanon!</h3>
+          <p>Lebanon is packed with wonders. Explore Baalbek’s Roman ruins, stroll through historic Byblos, or marvel at Jeita Grotto. Mountains, beaches, and history make it unforgettable.</p>
+          <p><a href="attractions.html">Discover More...</a></p>
+        </span>
+        <span class="page_item">
+          <img class="pages_images" src="food.jpg" alt="Mediterranean Food">
+          <h3>Hungry? We Gotcha!Take a Look at our Kitchen:</h3>
+          <p>Lebanese food is fresh, flavorful, and sharable. From hummus and tabbouleh to sizzling kebabs, every dish is a delight. Don’t forget sweet treats like baklava to end your meal perfectly.</p>
+          <p><a href="food.html">Discover More...</a></p>
+        </span>
+      </section>
+    </main>
+    <img class="header_img" id="bttm_img" src="lebanese_logo.png" alt="Lebanese Logo">
+    <footer>
+      <nav>
+        <ol>
+          <li class="footer_li"><a class="footer_a"  href="index.html">Home</a></li>
+          <li class="footer_li"><a class="footer_a" href="culture.html">History and Culture</a></li>
+          <li class="footer_li"><a class="footer_a" href="attractions.html">Places to visit</a></li>
+          <li class="footer_li"><a class="footer_a" href="food.html">Kitchen</a></li>
+          <li class="footer_li"><a class="footer_a" href="contact.html">Contact</a></li>
+        </ol>
+      </nav>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.birds.min.js"></script>
+    <script>
+      // JavaScript to hide the preloader after the page is fully loaded
+      window.addEventListener('load', function () {
+        document.body.classList.add('loaded');
+      });
+      function toggleMenu() {
+        const navbar = document.getElementById('navbar');
+        navbar.classList.toggle('open');
+      }
+      VANTA.BIRDS({
+        el: "#vanta-container",
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        scale: 1.00,
+        scaleMobile: 1.00,
+        backgroundColor: 0x000000,
+        color1: 0x1e8b15,
+        color2: 0x6bffb3,
+        colorMode: "lerp"
+      });
+    </script>
+  </body>
+</html>
